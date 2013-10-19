@@ -1,12 +1,8 @@
 package com.example.blogreader;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -160,6 +156,23 @@ public class MainListActivity extends ListActivity {
 			JSONObject jsonResponse=null;
 			
 			try {
+				InputStream in = getAssets().open("Data.txt");
+				ByteArrayOutputStream baos = new ByteArrayOutputStream(1024);
+				int oneByte;
+				while ((oneByte = in.read()) != -1) {
+				    baos.write(oneByte);
+				}
+				String json = baos.toString();
+				jsonResponse=new JSONObject(json);
+				
+			} catch (IOException e) {
+				
+				logException(e);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			/*try {
 					URL blogFeedUrl = new URL("http://blog.teamtreehouse.com/api/get_recent_summary/?count=" + NUMBER_OF_POSTS);
 					HttpURLConnection connection = (HttpURLConnection) blogFeedUrl.openConnection();
 					connection.connect();
@@ -189,7 +202,7 @@ public class MainListActivity extends ListActivity {
 		        	}
 		        catch(Exception e){
 		        	logException(e);
-		        }
+		        }*/
 			 return jsonResponse;
 		}
     	
