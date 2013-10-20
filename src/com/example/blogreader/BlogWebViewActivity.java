@@ -17,6 +17,7 @@ public class BlogWebViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_blog_web_view);
 
+		
 		Intent intent = getIntent();
 		Uri blogUri = intent.getData();
 		mUrl = blogUri.toString();

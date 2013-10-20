@@ -69,8 +69,10 @@ public class MainListActivity extends ListActivity {
 			jsonPosts = mBlogData.getJSONArray("posts");
 			JSONObject jsonPost = jsonPosts.getJSONObject(position);
 	     	String blogUrl= jsonPost.getString("url");
+			//String image = jsonPost.getString("thumbnail");
 	     	Intent intent = new Intent(this, BlogWebViewActivity.class);
 	     	intent.setData(Uri.parse(blogUrl));
+	     	//intent.putExtra("image", image); 
 	     	startActivity(intent);
 	     	
 		} catch (JSONException e) {
@@ -111,9 +113,9 @@ public class MainListActivity extends ListActivity {
 				for (int i=0;i<jsonPosts.length();i++){
 					JSONObject post = jsonPosts.getJSONObject(i);
 					String title = post.getString(KEY_TITLE);
-					title=Html.fromHtml(title).toString();
+					title=title.toString();
 					String author = post.getString(KEY_AUTHOR);
-					author=Html.fromHtml(author).toString();
+					author=author.toString();
 					
 					HashMap<String, String> blogPost = new HashMap<String, String>();
 					blogPost.put(KEY_TITLE, title);
@@ -169,7 +171,7 @@ public class MainListActivity extends ListActivity {
 				
 				logException(e);
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			/*try {
